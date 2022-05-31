@@ -51,4 +51,4 @@ const Screen = ({
   );
 };
 
-export {Screen};
+export default Screen;
