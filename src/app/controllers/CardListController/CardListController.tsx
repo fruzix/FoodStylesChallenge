@@ -6,6 +6,7 @@ import {CARDS_QUERY} from '@Domain/graphql/cardsData';
 import {ADD_CARD} from '@Domain/graphql/addCard';
 import {DELETE_CARD} from '@Domain/graphql/deleteCard';
 import {DUPLICATE_CARD} from '@Domain/graphql/duplicateCard';
+import {Share} from 'react-native';
 
 function CardListController() {
   const {loading, data} = useQuery(CARDS_QUERY);
@@ -18,6 +19,9 @@ function CardListController() {
   const [duplicateCard] = useMutation(DUPLICATE_CARD, {
     refetchQueries: [CARDS_QUERY],
   });
+  const [shareCard] = useMutation(DUPLICATE_CARD, {
+    refetchQueries: [CARDS_QUERY],
+  });
 
   const [openMenu, setOpenMenu] = useState(false);
   const [selected, setSelected] = useState('');
@@ -26,11 +30,26 @@ function CardListController() {
     addCard();
   };
 
+  const onShare = async (id: string) => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        shareCard({variables: {id}});
+      } else if (result.action === Share.dismissedAction) {
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleCardPress = (id: string) =>
     setSelected(id === selected ? '' : id);
 
   const handleOnDeletePress = (id: string) => deleteCard({variables: {id}});
-  const handleOnSharePress = (id: string) => deleteCard({variables: {id}});
+  const handleOnSharePress = (id: string) => onShare(id);
   const handleOnDuplicatePress = (id: string) =>
     duplicateCard({variables: {id}});
 
@@ -50,3 +69,6 @@ function CardListController() {
 }
 
 export default CardListController;
+function alert(message: any) {
+  throw new Error('Function not implemented.');
+}

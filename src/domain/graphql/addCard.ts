@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
 export const ADD_CARD = gql`
-  mutation CreateCard() {
+  mutation {
     createCard(
       data: {
         name: "New card"
