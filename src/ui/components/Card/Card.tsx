@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {
+  Animated,
   Image,
   Text,
   TextStyle,
@@ -8,23 +9,28 @@ import {
 } from 'react-native';
 
 import Box from '../Box';
+import ActionButton from '../ActionButton';
 
 import useStyle from '@Framework/hooks/useStyle';
 import useAppTheme from '@Framework/hooks/useTheme';
-import {OPTIONS} from '@App/assets/icons';
+
+import {CLOSE, DELETE, OPTIONS} from '@App/assets/icons';
 
 interface ICard {
   text: string;
-  onLongPress?(): void;
   onOptionsPress(): void;
+  openMenu: boolean;
+  showOptions: boolean;
 }
 
 interface ICardStyles {
   container: ViewStyle;
+  actionsButtonsContainer: ViewStyle;
   label: TextStyle;
+  addToTop: ViewStyle;
 }
 
-const Card = ({text, onLongPress, onOptionsPress}: ICard) => {
+const Card = ({text, onOptionsPress, showOptions}: ICard) => {
   const {colors, spacing} = useAppTheme();
 
   const styles = useStyle<ICardStyles>({
@@ -40,14 +46,44 @@ const Card = ({text, onLongPress, onOptionsPress}: ICard) => {
       },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
+      zIndex: showOptions ? 10 : 0,
     },
     label: {
       maxWidth: '80%',
     },
+    actionsButtonsContainer: {
+      justifyContent: 'flex-end',
+    },
+    addToTop: {
+      zIndex: 7,
+    },
   });
 
+  const opacityRef = useRef(new Animated.Value(0)).current;
+  const translateYRef = useRef(new Animated.Value(0)).current;
+
+  const animations = useMemo(
+    () => [
+      Animated.spring(translateYRef, {
+        toValue: showOptions ? -5 : -5,
+        friction: 8,
+        useNativeDriver: true,
+      }),
+      Animated.spring(opacityRef, {
+        toValue: showOptions ? 1 : 0,
+        friction: 8,
+        useNativeDriver: true,
+      }),
+    ],
+    [showOptions, translateYRef, opacityRef],
+  );
+
+  useEffect(() => {
+    Animated.parallel(animations).start();
+  }, [showOptions, animations]);
+
   return (
-    <TouchableOpacity onLongPress={onLongPress}>
+    <Box style={styles.addToTop}>
       <Box
         px={spacing.m18}
         py={spacing.m14}
@@ -57,10 +93,26 @@ const Card = ({text, onLongPress, onOptionsPress}: ICard) => {
           <Text>{text}</Text>
         </Box>
         <TouchableOpacity onPress={onOptionsPress}>
-          <Image source={OPTIONS} />
+          <Image source={showOptions ? CLOSE : OPTIONS} />
         </TouchableOpacity>
       </Box>
-    </TouchableOpacity>
+      {showOptions ? (
+        <Animated.View
+          style={{
+            opacity: opacityRef,
+          }}>
+          <Animated.View
+            style={[
+              styles.actionsButtonsContainer,
+              {
+                transform: [{translateY: translateYRef}],
+              },
+            ]}>
+            <ActionButton onPress={() => {}} source={DELETE} />
+          </Animated.View>
+        </Animated.View>
+      ) : null}
+    </Box>
   );
 };
 

@@ -17,7 +17,7 @@ const Overlay = () => {
         position: 'absolute',
         width,
         height,
-        zIndex: 5,
+        zIndex: 2,
       },
     },
     [width, height],
