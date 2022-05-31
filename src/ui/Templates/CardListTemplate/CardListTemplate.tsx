@@ -1,25 +1,29 @@
 import React from 'react';
-import {View, Text, ViewStyle} from 'react-native';
+import {ViewStyle} from 'react-native';
+
+import {Box, Header, Screen} from '@Ui/components';
 
 import useStyle from '@Framework/hooks/useStyle';
+import useAppTheme from '@Framework/hooks/useTheme';
 
 interface ICardListStyles {
   container: ViewStyle;
 }
 
 const CardListTemplate = () => {
+  const {} = useAppTheme();
   const styles = useStyle<ICardListStyles>({
     container: {
       justifyContent: 'center',
-      flex: 1,
-      alignItems: 'center',
     },
   });
 
   return (
-    <View style={styles.container}>
-      <Text>CardListTemplate</Text>
-    </View>
+    <Screen style={styles.container}>
+      <Box>
+        <Header />
+      </Box>
+    </Screen>
   );
 };
 

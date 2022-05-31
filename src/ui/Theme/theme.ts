@@ -27,9 +27,10 @@ export interface ITheme {
     caption1: ITypography;
   };
   spacing: {
-    xs4: 4;
-    s8: 8;
-    m12: 12;
+    xs4: number;
+    s8: number;
+    m12: number;
+    m18: number;
   };
 }
 
@@ -66,6 +67,7 @@ export const Theme: ITheme = {
     xs4: 4,
     s8: 8,
     m12: 12,
+    m18: 18,
   },
 };
 
