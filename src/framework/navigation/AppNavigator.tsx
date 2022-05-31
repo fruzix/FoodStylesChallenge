@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {HomeController} from '@App/controllers';
+import {CardListController} from '@App/controllers';
 
 import {NavigationRoute, RootStackParamList} from '@Types/navigation';
 
@@ -12,7 +12,10 @@ function AppNavigator() {
 
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={NavigationRoute.Home} component={HomeController} />
+      <Stack.Screen
+        name={NavigationRoute.CardList}
+        component={CardListController}
+      />
     </Stack.Navigator>
   );
 }

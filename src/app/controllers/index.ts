@@ -1,1 +1,1 @@
-export {default as HomeController} from './CardListController';
+export {default as CardListController} from './CardListController';

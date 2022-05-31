@@ -1,11 +1,11 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const NavigationRoute = {
-  Home: 'Home',
+  CardList: 'CardList',
 };
 
 export type RootStackParamList = {
-  Home: undefined;
+  CardList: undefined;
 };
 
 export type RootStackNavigationProps<T extends keyof RootStackParamList> =
