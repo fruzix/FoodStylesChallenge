@@ -1,10 +1,10 @@
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 
 const ProximaNovaAlt = {
-  regular: 'ProximaNovAlt-Regular',
-  semiBold: 'ProximaNovAlt-SemiBold',
-  semiBoldCond: 'ProximaNovAltCond-SemiBold',
-  bold: 'ProximaNovAlt-Bold',
+  regular: 'ProximaNovaAlt-Regular',
+  semiBold: 'ProximaNovaAlt-Semibold',
+  semiBoldCond: 'ProximaNovaAltCond-Semibold',
+  bold: 'ProximaNovaAlt-Bold',
 } as const;
 
 interface ITypography {
