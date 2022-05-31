@@ -18,6 +18,7 @@ interface ICardListTemplate {
   loading: boolean;
   onAddCardPress(): void;
   onCardPress(id: string): void;
+  onDeletePress(id: string): void;
   isMenuOpen: boolean;
   selected: string;
 }
@@ -34,6 +35,7 @@ const CardListTemplate = ({
   loading,
   isMenuOpen,
   selected,
+  onDeletePress,
 }: ICardListTemplate) => {
   const {spacing, colors} = useAppTheme();
   const styles = useStyle<ICardListStyles>({
@@ -54,6 +56,7 @@ const CardListTemplate = ({
       <Card
         showOptions={showActionButtons}
         openMenu={isMenuOpen}
+        onDeletePress={() => onDeletePress(id)}
         onOptionsPress={() => onCardPress(id)}
         text={name}
       />

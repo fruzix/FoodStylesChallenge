@@ -14,11 +14,12 @@ import ActionButton from '../ActionButton';
 import useStyle from '@Framework/hooks/useStyle';
 import useAppTheme from '@Framework/hooks/useTheme';
 
-import {CLOSE, DELETE, OPTIONS} from '@App/assets/icons';
+import {CLOSE, DELETE, DUPLICATE, OPTIONS, SHARE} from '@App/assets/icons';
 
 interface ICard {
   text: string;
   onOptionsPress(): void;
+  onDeletePress(): void;
   openMenu: boolean;
   showOptions: boolean;
 }
@@ -30,7 +31,7 @@ interface ICardStyles {
   addToTop: ViewStyle;
 }
 
-const Card = ({text, onOptionsPress, showOptions}: ICard) => {
+const Card = ({text, onOptionsPress, onDeletePress, showOptions}: ICard) => {
   const {colors, spacing} = useAppTheme();
 
   const styles = useStyle<ICardStyles>({
@@ -108,7 +109,9 @@ const Card = ({text, onOptionsPress, showOptions}: ICard) => {
                 transform: [{translateY: translateYRef}],
               },
             ]}>
-            <ActionButton onPress={() => {}} source={DELETE} />
+            <ActionButton onPress={onDeletePress} source={DELETE} />
+            <ActionButton onPress={onDeletePress} source={DUPLICATE} />
+            <ActionButton onPress={onDeletePress} source={SHARE} />
           </Animated.View>
         </Animated.View>
       ) : null}
