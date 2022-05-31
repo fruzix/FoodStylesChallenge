@@ -18,6 +18,8 @@ export interface ITheme {
     secondary: string;
     background: string;
     textOnLight: string;
+    white: string;
+    black: string;
   };
   typography: {
     h1: ITypography;
@@ -30,6 +32,7 @@ export interface ITheme {
     xs4: number;
     s8: number;
     m12: number;
+    m14: number;
     m18: number;
   };
 }
@@ -40,6 +43,8 @@ export const Theme: ITheme = {
     secondary: '#f3c442',
     background: '#f8f8f8',
     textOnLight: '#434343',
+    white: '#fff',
+    black: '#000',
   },
   typography: {
     h1: {
@@ -67,6 +72,7 @@ export const Theme: ITheme = {
     xs4: 4,
     s8: 8,
     m12: 12,
+    m14: 14,
     m18: 18,
   },
 };
