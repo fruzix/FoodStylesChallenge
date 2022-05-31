@@ -1,7 +1,6 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {
   ActivityIndicator,
-  Animated,
   FlatList,
   ListRenderItem,
   ViewStyle,
@@ -19,6 +18,8 @@ interface ICardListTemplate {
   onAddCardPress(): void;
   onCardPress(id: string): void;
   onDeletePress(id: string): void;
+  onSharePress(id: string): void;
+  onDuplicatePress(id: string): void;
   isMenuOpen: boolean;
   selected: string;
 }
@@ -36,6 +37,8 @@ const CardListTemplate = ({
   isMenuOpen,
   selected,
   onDeletePress,
+  onSharePress,
+  onDuplicatePress,
 }: ICardListTemplate) => {
   const {spacing, colors} = useAppTheme();
   const styles = useStyle<ICardListStyles>({
@@ -58,6 +61,8 @@ const CardListTemplate = ({
         openMenu={isMenuOpen}
         onDeletePress={() => onDeletePress(id)}
         onOptionsPress={() => onCardPress(id)}
+        onDuplicatePress={() => onDuplicatePress(id)}
+        onSharePress={() => onSharePress(id)}
         text={name}
       />
     );

@@ -20,6 +20,8 @@ interface ICard {
   text: string;
   onOptionsPress(): void;
   onDeletePress(): void;
+  onDuplicatePress(): void;
+  onSharePress(): void;
   openMenu: boolean;
   showOptions: boolean;
 }
@@ -31,7 +33,14 @@ interface ICardStyles {
   addToTop: ViewStyle;
 }
 
-const Card = ({text, onOptionsPress, onDeletePress, showOptions}: ICard) => {
+const Card = ({
+  text,
+  onOptionsPress,
+  onDeletePress,
+  showOptions,
+  onDuplicatePress,
+  onSharePress,
+}: ICard) => {
   const {colors, spacing} = useAppTheme();
 
   const styles = useStyle<ICardStyles>({
@@ -110,8 +119,8 @@ const Card = ({text, onOptionsPress, onDeletePress, showOptions}: ICard) => {
               },
             ]}>
             <ActionButton onPress={onDeletePress} source={DELETE} />
-            <ActionButton onPress={onDeletePress} source={DUPLICATE} />
-            <ActionButton onPress={onDeletePress} source={SHARE} />
+            <ActionButton onPress={onDuplicatePress} source={DUPLICATE} />
+            <ActionButton onPress={onSharePress} source={SHARE} />
           </Animated.View>
         </Animated.View>
       ) : null}
