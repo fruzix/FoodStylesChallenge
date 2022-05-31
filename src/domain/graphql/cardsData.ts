@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client';
 
-export const CARDS = gql`
+export const CARDS_QUERY = gql`
   query {
     cards {
       id
